@@ -1,0 +1,8 @@
+ID         | JUDUL                          | STATUS PINJAM      | LAYAK PINJAM   
+----------------------------------------------------------------------------------
+MJ-001     | Info Teknologi Edisi 88        | Tersedia           | Ya             
+BD-002     | Jurnal Rekayasa Perangkat      | Tersedia           | Ya             
+BD-001     | Panduan Pemrograman Java       | Tersedia           | Ya             
+BK-002     | Basis Data Relasional          | Dipinjam           | Tidak          
+MJ-002     | Info Teknologi Edisi 87        | Tersedia           | Tidak          
+BK-001     | Java How to Program            | Dipinjam           | Tidak          
