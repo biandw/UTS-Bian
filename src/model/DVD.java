@@ -1,19 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author HYPE AMD
- */
-public class DVD extends KoleksiPustaka {
- private int durasiMenit;
+public class DVD extends KoleksiPustaka implements Terarsip {
+    private int durasiMenit;
+    private boolean terarsip;
 
-    public DVD(String id, String judul, boolean sedangDipinjam, int durasiMenit) {
-        super(id, judul, sedangDipinjam);
+    public DVD(String id, String judul, int tahunTerbit, int durasiMenit) {
+        super(id, judul, tahunTerbit);
         this.durasiMenit = durasiMenit;
+        this.terarsip = false;
     }
 
     public int getDurasiMenit() {
@@ -21,13 +15,22 @@ public class DVD extends KoleksiPustaka {
     }
 
     @Override
-    public boolean isLayakPinjam() {
-        // DVD layak pinjam jika durasinya di atas 30 menit
-        return durasiMenit > 30;
+    public boolean isArsip() {
+        return terarsip;
     }
 
     @Override
-    public String getDeskripsi() {
-        return super.getDeskripsi() + ", Durasi: " + durasiMenit + " menit [Tipe: DVD]";
-    }   
+    public void setArsip(boolean arsip) {
+        this.terarsip = arsip;
+    }
+
+    @Override
+    public boolean isLayakPinjam() {
+        return true;
+    }
+
+    @Override
+    public String deskripsi() {
+        return super.deskripsi() + " | Durasi: " + durasiMenit + " Menit | Layak: " + (isLayakPinjam() ? "Ya" : "Tidak");
+    }
 }

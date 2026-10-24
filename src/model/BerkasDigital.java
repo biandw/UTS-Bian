@@ -1,38 +1,27 @@
 package model;
 
-public class BerkasDigital extends KoleksiPustaka {
-    private int tahunTerbit;
-    private double ukuranFileMB;
+public class BerkasDigital extends KoleksiPustaka implements Terarsip {
+    private double ukuranMB;
     private String urlUnduh;
+    private boolean terarsip;
 
-    public BerkasDigital(String id, String judul, int tahunTerbit, double ukuranFileMB, String urlUnduh) {
-        super(id, judul, false); // Status awal tidak sedang dipinjam
-        this.tahunTerbit = tahunTerbit;
-        this.ukuranFileMB = ukuranFileMB;
+    public BerkasDigital(String id, String judul, int tahunTerbit, double ukuranMB, String urlUnduh) {
+        super(id, judul, tahunTerbit);
+        this.ukuranMB = ukuranMB;
         this.urlUnduh = urlUnduh;
+        this.terarsip = false;
     }
 
-    public int getTahunTerbit() {
-        return tahunTerbit;
-    }
-
-    public double getUkuranFileMB() {
-        return ukuranFileMB;
-    }
-
-    public String getUrlUnduh() {
-        return urlUnduh;
-    }
+    @Override public boolean isArsip() { return terarsip; }
+    @Override public void setArsip(boolean arsip) { this.terarsip = arsip; }
 
     @Override
     public boolean isLayakPinjam() {
-        // Berkas digital selalu dianggap layak unduh atau layak akses
         return true;
     }
 
     @Override
-    public String getDeskripsi() {
-        return "BerkasDigital | ID: " + id + " | Judul: \"" + judul + "\" | Tahun: " + tahunTerbit + 
-               " | " + ukuranFileMB + " MB | " + urlUnduh;
+    public String deskripsi() {
+        return super.deskripsi() + " " + ukuranMB + "MB " + urlUnduh + " Layak";
     }
 }

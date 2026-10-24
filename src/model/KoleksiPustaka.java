@@ -1,49 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author HYPE AMD
- */
 public abstract class KoleksiPustaka {
-    protected String id;
-    protected String judul;
-    protected boolean sedangDipinjam;
+    private String id;
+    private String judul;
+    private int tahunTerbit;
+    private boolean dipinjam;
 
-    public KoleksiPustaka(String id, String judul, boolean sedangDipinjam) {
+    public KoleksiPustaka(String id, String judul, int tahunTerbit) {
         this.id = id;
         this.judul = judul;
-        this.sedangDipinjam = sedangDipinjam;
+        this.tahunTerbit = tahunTerbit;
+        this.dipinjam = false;
     }
 
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
+    public String getJudul() { return judul; }
+    public int getTahunTerbit() { return tahunTerbit; }
+    public boolean isDipinjam() { return dipinjam; }
+    public void setDipinjam(boolean dipinjam) { this.dipinjam = dipinjam; }
 
-    public String getjudul() {
-        return judul;
-    }
-
-    public boolean isSedangDipinjam() {
-        return sedangDipinjam;
-    }
-
-    public void setSedangDipinjam(boolean sedangDipinjam) {
-        this.sedangDipinjam = sedangDipinjam;
-    }
-
-    // Method abstract untuk aturan kelayakan pinjam (Soal 1)
     public abstract boolean isLayakPinjam();
 
-    // Method deskripsi yang diperluas oleh turunan memakai super (Soal 1)
-    public String getDeskripsi() {
-        return "ID: " + id + ", Judul: " + judul + ", Status Pinjam: " + (sedangDipinjam ? "Sedang Dipinjam" : "Tersedia");
+    public String deskripsi() {
+        return id + " " + judul + " " + tahunTerbit + " " + (dipinjam ? "Dipinjam" : "Tersedia");
     }
-
-    public String getJudul() {
-    return this.judul; // Mengembalikan nilai judul dari objek koleksi
-} // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+}

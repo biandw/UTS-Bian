@@ -1,13 +1,12 @@
 package layanan;
 
-import model.KoleksiPustaka;
-import eksepsi.KoleksiSedangDipinjamException;
-import eksepsi.KoleksiTidakLayakException;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import model.KoleksiPustaka;
+import eksepsi.PustakaException;
+import eksepsi.KoleksiTidakLayakException;
+import eksepsi.KoleksiSedangDipinjamException;
 
 public class KatalogPerpustakaan {
     private List<KoleksiPustaka> daftarKoleksi;
@@ -24,35 +23,36 @@ public class KatalogPerpustakaan {
         return daftarKoleksi;
     }
 
-    // Method cetakStatus memproses seluruh koleksi secara polimorfik TANPA instanceof (Soal 3)
-    public void cetakStatus() {
-        System.out.println("=== STATUS KATALOG PERPUSTAKAAN ===");
-        for (KoleksiPustaka koleksi : daftarKoleksi) {
-            // Memanggil getDeskripsi() secara polimorfik tanpa pengecekan tipe objek
-            System.out.println(koleksi.getDeskripsi());
-        }
+    public void urutkan(Comparator<KoleksiPustaka> comparator) {
+        daftarKoleksi.sort(comparator);
     }
 
-    // Method pinjam yang melempar eksepsi sesuai keadaan (Soal 5)
-    public void pinjam(String id) throws KoleksiSedangDipinjamException, KoleksiTidakLayakException {
-        for (KoleksiPustaka koleksi : daftarKoleksi) {
-            if (koleksi.getId().equals(id)) {
-                if (koleksi.isSedangDipinjam()) {
-                    throw new KoleksiSedangDipinjamException();
-                }
-                if (!koleksi.isLayakPinjam()) {
-                    throw new KoleksiTidakLayakException();
-                }
-                koleksi.setSedangDipinjam(true);
-                System.out.println("Berhasil meminjam koleksi: " + koleksi.getJudul());
-                return;
+    public KoleksiPustaka cariById(String id) {
+        for (KoleksiPustaka k : daftarKoleksi) {
+            if (k.getId().equalsIgnoreCase(id)) {
+                return k;
             }
         }
-        System.out.println("Koleksi dengan ID " + id + " tidak ditemukan.");
+        return null;
     }
 
-    // Method urut yang menerima Comparator dari luar (Soal 4)
-    public void urut(Comparator<KoleksiPustaka> comparator) {
-        daftarKoleksi.sort(comparator);
+    public void pinjamKoleksi(String id) throws PustakaException {
+        KoleksiPustaka koleksi = cariById(id);
+        if (koleksi == null) {
+            throw new PustakaException("Koleksi dengan ID " + id + " tidak ditemukan.");
+        }
+        if (!koleksi.isLayakPinjam()) {
+            throw new KoleksiTidakLayakException("Koleksi '" + koleksi.getJudul() + "' tidak layak untuk dipinjam.");
+        }
+        if (koleksi.isDipinjam()) {
+            throw new KoleksiSedangDipinjamException("Koleksi '" + koleksi.getJudul() + "' sedang dipinjam.");
+        }
+        koleksi.setDipinjam(true);
+    }
+
+    public void cetakStatus() {
+        for (KoleksiPustaka k : daftarKoleksi) {
+            System.out.println(k.deskripsi());
+        }
     }
 }

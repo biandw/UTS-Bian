@@ -1,28 +1,25 @@
 package model;
 
-public class BukuCetak extends KoleksiPustaka {
-    private int tahunTerbit;
-    private int jumlahHalaman;
+public class BukuCetak extends Buku {
     private String lokasiRak;
-    private boolean sedangDiperbaiki;
+    private boolean dalamPerbaikan;
 
-    public BukuCetak(String id, String judul, int tahunTerbit, int jumlahHalaman, String lokasiRak, boolean sedangDiperbaiki) {
-        super(id, judul, sedangDiperbaiki); // sedangDipinjam merepresentasikan status perbaikan/pinjam
-        this.tahunTerbit = tahunTerbit;
-        this.jumlahHalaman = jumlahHalaman;
+    public BukuCetak(String id, String judul, int tahunTerbit, int jumlahHalaman, String lokasiRak, boolean dalamPerbaikan) {
+        super(id, judul, tahunTerbit, jumlahHalaman);
         this.lokasiRak = lokasiRak;
-        this.sedangDiperbaiki = sedangDiperbaiki;
+        this.dalamPerbaikan = dalamPerbaikan;
     }
+
+    public String getLokasiRak() { return lokasiRak; }
+    public boolean isDalamPerbaikan() { return dalamPerbaikan; }
 
     @Override
     public boolean isLayakPinjam() {
-        return !sedangDiperbaiki;
+        return !dalamPerbaikan;
     }
 
     @Override
-    public String getDeskripsi() {
-        return "BukuCetak | ID: " + id + " | Judul: \"" + judul + "\" | Tahun: " + tahunTerbit + 
-               " | " + jumlahHalaman + " halaman | Rak: " + lokasiRak + 
-               " | Status: " + (sedangDiperbaiki ? "sedang diperbaiki" : "tidak diperbaiki");
+    public String deskripsi() {
+        return super.deskripsi() + " " + lokasiRak + " " + (dalamPerbaikan ? "Perbaikan" : "Aman") + " " + (isLayakPinjam() ? "Layak" : "TidakLayak");
     }
 }

@@ -1,28 +1,29 @@
 package model;
 
-public class Majalah extends KoleksiPustaka {
-    private int tahunTerbit;
+public class Majalah extends KoleksiPustaka implements Terarsip {
     private int edisi;
     private String bulanTerbit;
-    private boolean terbaru;
+    private boolean edisiTerbaru;
+    private boolean terarsip;
 
-    public Majalah(String id, String judul, int tahunTerbit, int edisi, String bulanTerbit, boolean terbaru) {
-        super(id, judul, false);
-        this.tahunTerbit = tahunTerbit;
+    public Majalah(String id, String judul, int tahunTerbit, int edisi, String bulanTerbit, boolean edisiTerbaru) {
+        super(id, judul, tahunTerbit);
         this.edisi = edisi;
         this.bulanTerbit = bulanTerbit;
-        this.terbaru = terbaru;
+        this.edisiTerbaru = edisiTerbaru;
+        this.terarsip = false;
     }
+
+    @Override public boolean isArsip() { return terarsip; }
+    @Override public void setArsip(boolean arsip) { this.terarsip = arsip; }
 
     @Override
     public boolean isLayakPinjam() {
-        return terbaru;
+        return edisiTerbaru;
     }
 
     @Override
-    public String getDeskripsi() {
-        return "Majalah | ID: " + id + " | Judul: \"" + judul + "\" | Tahun: " + tahunTerbit + 
-               " | edisi " + edisi + " | " + bulanTerbit + 
-               " | " + (terbaru ? "edisi terbaru" : "bukan terbaru");
+    public String deskripsi() {
+        return super.deskripsi() + " " + edisi + " " + bulanTerbit + " " + (edisiTerbaru ? "Terbaru" : "Lama") + " " + (isLayakPinjam() ? "Layak" : "TidakLayak");
     }
 }

@@ -1,33 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
-/**
- *
- * @author HYPE AMD
- */
-public class Buku extends KoleksiPustaka {
-    private String penulis;
+public abstract class Buku extends KoleksiPustaka {
+    private int jumlahHalaman;
 
-    public Buku(String id, String judul, boolean sedangDipinjam, String penulis) {
-        super(id, judul, sedangDipinjam);
-        this.penulis = penulis;
+    public Buku(String id, String judul, int tahunTerbit, int jumlahHalaman) {
+        super(id, judul, tahunTerbit);
+        this.jumlahHalaman = jumlahHalaman;
     }
 
-    public String getPenulis() {
-        return penulis;
-    }
+    public int getJumlahHalaman() { return jumlahHalaman; }
 
     @Override
-    public boolean isLayakPinjam() {
-        // Buku selalu layak pinjam jika tidak rusak/hilang (contoh aturan)
-        return true;
-    }
-
-    @Override
-    public String getDeskripsi() {
-        return super.getDeskripsi() + ", Penulis: " + penulis + " [Tipe: Buku]";
+    public String deskripsi() {
+        return super.deskripsi() + " " + jumlahHalaman;
     }
 }

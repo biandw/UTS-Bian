@@ -1,8 +1,10 @@
-ID         | JUDUL                          | STATUS PINJAM      | LAYAK PINJAM   
-----------------------------------------------------------------------------------
-MJ-001     | Info Teknologi Edisi 88        | Tersedia           | Ya             
-BD-002     | Jurnal Rekayasa Perangkat      | Tersedia           | Ya             
-BD-001     | Panduan Pemrograman Java       | Tersedia           | Ya             
-BK-002     | Basis Data Relasional          | Dipinjam           | Tidak          
-MJ-002     | Info Teknologi Edisi 87        | Tersedia           | Tidak          
-BK-001     | Java How to Program            | Dipinjam           | Tidak          
+==================================================
+              DAFTAR KATALOG PERPUSTAKAAN          
+==================================================
+MJ-001 Info Teknologi Edisi 88 2026 Tersedia 88 Agustus Terbaru Layak
+BK-001 Java How to Program 2022 Dipinjam 620 rak A-12 Aman Layak
+BD-002 Jurnal Rekayasa Perangkat 2025 Tersedia 8.0MB unduh.polmed.ac.id/bd002 Layak
+BD-001 Panduan Pemrograman Java 2024 Tersedia 15.0MB unduh.polmed.ac.id/bd001 Layak
+BK-002 Basis Data Relasional 2021 Tersedia 410 rak B-04 Perbaikan TidakLayak
+MJ-002 Info Teknologi Edisi 87 2026 Tersedia 87 Juli Lama TidakLayak
+==================================================
